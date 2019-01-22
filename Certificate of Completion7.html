@@ -1,0 +1,1021 @@
+
+<!-- saved from url=(0176)https://csc.skillport.com/skillportfe/reportCertificateOfCompletion.action?timezone=Asia/Kolkata&courseid=CDE$521049:_ss_cca:sd_exui_a03_it_enus&myprogress=1&username=jgurasala -->
+<html class="gr__csc_skillport_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" src="./Certificate of Completion7_files/browser-check.js.download"></script>
+
+
+
+
+
+
+
+
+
+
+	<script language="javascript">	
+	var addTagDialog = null;
+	var newWind
+
+	//function to make sure the login window is closed
+	function closeChild() {
+		newWind.close()
+	}
+
+	//function to check for empty fields
+	var flds
+	var passed
+	var i
+
+	function isDataEntered(formName,theRange) {
+		passed = false;
+		var theForm=eval("document." + formName)
+		for (i=0;i<theRange;i++) {
+	    	if (theForm.elements[i].value == "") {
+	    		alert("Do not leave the first name, last name, or email fields blank");
+				return false
+				break
+			}
+		}
+		return true
+	}
+
+	/*  isEmailAddress
+	*
+	*  This function is always called by checkEmailField.
+	*  Purpose: To validate that email addresses to have no
+	*  spaces. This is supplementary to any data validation
+	*  that is performed on submit.
+	*  @author WendyBossons
+	*  @param frmElement - required
+	*
+	*  @return boolean
+	*/
+
+	// field level data validation for email address
+	function isEmailAddress(frmElement) {
+	   	if (isValidEmail(frmElement)){
+			return true;
+		}
+		else {
+			alert("Enter a valid email address.");
+			return false;
+		}
+	}
+
+	/*  checkEmailField
+	 *
+	 *  Purpose: To validate email addresses. Validation
+	 *  is called in two phases to circumvent cross
+	 *  browser issues with alert events and focus/select.
+	 *
+	 *  @author WendyBossons
+	 *  @param frmElement - required
+	 *
+	 *  @return - for IE returns event.returnValue (this changes
+	 *  the focus correctly.)
+	 *
+	*/
+	function checkEmailField(frmElement) {
+		if (isEmailAddress(frmElement)) {
+            return true;
+        }
+        else {
+                frmElement.focus();
+                frmElement.select();
+                return false;
+        }
+	}
+
+	function whatResolution(){
+   		var w=0;
+		if ((screen.width == 640) && (screen.height == 480))
+	 		 w=6;
+		else if ((screen.width == 800) && (screen.height == 600))
+	  		w=8
+		else if ((screen.width == 1024) && (screen.height == 768))
+ 	 		w=1
+		else
+			w=6;
+		return w;
+	}
+
+  	// dhtml related scripts
+	var layerRef;
+	var styleRef;
+	var layerString;
+	var layerVis = "main";
+	var makeVis;
+	var hideVis;
+	var scriptVis = "";
+	//cross browser dhtml
+	function writeBrowserSpecific() {
+		if (is.ie) {
+			layerRef="all['"
+			styleRef="'].style"
+		}
+		else {
+			layerRef="layers['"
+			styleRef="']"
+		}
+	}
+
+	writeBrowserSpecific()
+
+	var strHelpOptions = "location=no";
+    strHelpOptions += ",toolbar=yes";
+    strHelpOptions += ",menubar=yes";
+    strHelpOptions += ",status=yes";
+    strHelpOptions += ",scrollbars=yes";
+    strHelpOptions += ",resizable=yes";
+    strHelpOptions += ",top=0";
+    strHelpOptions += ",left=0";
+    strHelpOptions += ",width=800";
+    strHelpOptions += ",height=600";
+
+    function showContextSpecificHelp(strUrl){
+    	window.open(strUrl, "Help", strHelpOptions);
+	}
+
+	var isOpen = false;
+	var childWind = "";
+    function childWindow (strOperation, strUrl, intHeight, intWidth) {
+		if (arguments[0] == "open") {
+			isOpen = true;
+			childWind=window.open(strUrl,'theChildWindow','scrollbars=yes,toolbar=yes,menubar=yes,height=' + intHeight + ',width=' + intWidth + ',resizable=yes');
+			setTimeout('childWind.focus();', 50);
+			if(navigator.appVersion.indexOf("MSIE 4.") ==-1) {
+				childWind.focus();
+			}
+		}
+		else if (isOpen == true) {
+			childWind.close();
+			childWind == "";
+		}
+	}
+
+	function windowFocus(windName) {
+		if (windName != "") {
+			windName.focus();
+		}
+	}
+
+	/*
+	 * Utilities to escape a javascript string in UTF-8
+	 * comes from weblms2\lmsspecific\jscript\gen_scriptBCD5.js
+	 *
+	 */
+
+	var hexdigits = "0123456789ABCDEF";
+	function toHex(n) {
+		return "%" + hexdigits.charAt(n>>>4) + hexdigits.charAt(n&0x0F);
+	}
+
+	function myEscape(in_) {
+		var c, s;
+		var enc = "";
+		var i = 0;
+		while (i < in_.length) {
+			c = in_.charCodeAt(i++);
+			// handle UTF-16 surrogates
+			if (c >= 0xDC00 && c < 0xE000)
+				continue;
+
+			if (c >= 0xD800 && c < 0xDC00) {
+				if (i >= in_.length)
+					continue;
+				s = in_.charCodeAt(i++);
+				if (s<0xDC00 || c>=0xDE00)
+			  		continue;
+				c = ((c-0xD800)<<10)+(s-0xDC00)+0x10000;
+			}
+
+			// output value
+			if (c<0x80) {
+				var t = String.fromCharCode(c);
+				if ( (t>='0' && t<='9') || (t>='a' && t<='z') || (t>='A' && t<='Z') )
+					enc += t;
+				else
+					enc += toHex(c);
+			}
+		    else if (c<0x800)
+				enc += toHex(0xC0+(c>>6)) + toHex(0x80+(c&0x3F));
+		    else if (c<0x10000)
+				enc += toHex(0xE0+(c>>12)) + toHex(0x80+(c>>6&0x3F)) + toHex(0x80+(c&0x3F));
+	    	else
+				enc += toHex(0xF0+(c>>18)) + toHex(0x80+(c>>12&0x3F)) + toHex(0x80+(c>>6&0x3F)) + toHex(0x80+(c&0x3F));
+		}
+		return enc;
+	}
+
+
+	function myUnescape(in_) {
+		var c1, c2, n1, n2, n3;
+		var dec = "";
+		var i = 0;
+		while (i < in_.length) {
+			if (!isUnescapeable(in_, i)) {
+				dec += in_.charAt(i++);
+				continue;
+			}
+			i++;
+			c1 = in_.charAt(i++).toUpperCase();
+			c2 = in_.charAt(i++).toUpperCase();
+			var n1 = hexdigits.indexOf(c1)*16 + hexdigits.indexOf(c2);
+			if ( (n1 & 0x80) == 0 )  					// is it a one-byte character?
+				dec += String.fromCharCode(n1);
+
+			else if ( (n1 & 0xE0) == 0xC0 ) { 			// two-byte character?
+				if (!isUnescapeable(in_, i)) {
+					dec += String.fromCharCode(n1);     // threat it as a one-byte character
+					continue;
+				}
+				i++;
+				c1 = in_.charAt(i++).toUpperCase();
+				c2 = in_.charAt(i++).toUpperCase();
+				var n2 = hexdigits.indexOf(c1)*16 + hexdigits.indexOf(c2);
+				dec += String.fromCharCode( (n2&0x3F) + ((n1&0x1F)<<6) );
+			}
+			else if ( (n1 & 0xF0) == 0xE0 ) {			// is it a three-byte character?
+				if (!isUnescapeable(in_, i) || !isUnescapeable(in_, i+3)) {
+					dec += String.fromCharCode(n1);     // threat it as a one-byte character
+					continue;
+				}
+				i++; // skip % char
+				c1 = in_.charAt(i++).toUpperCase(); c2 = in_.charAt(i++).toUpperCase();
+				var n2 = hexdigits.indexOf(c1)*16 + hexdigits.indexOf(c2);
+				i++; // skip % char
+				c1 = in_.charAt(i++).toUpperCase(); c2 = in_.charAt(i++).toUpperCase();
+				var n3 = hexdigits.indexOf(c1)*16 + hexdigits.indexOf(c2);
+				dec += String.fromCharCode( (n3 & 0x3F) + ((n2 & 0x3F)<<6) + ((n1 & 0x0F)<<12) );
+			}
+			else	// it's not a UTF-8, just unescape it
+				dec += String.fromCharCode(n1);
+
+		} // while
+		return dec;
+	}
+
+	function isUnescapeable(str, pos) {
+		var c1, c2;
+		if (pos + 3 > str.length)
+			return false;
+		if (str.charAt(pos) != '%')
+			return false;
+		c1 = str.charAt(pos+1);
+		c2 = str.charAt(pos+2);
+		if (hexdigits.indexOf(c1.toUpperCase()) == -1)
+			return false;
+		if (hexdigits.indexOf(c2.toUpperCase()) == -1)
+			return false;
+		return true;
+	}
+
+	/*
+	 * Escape the searchString before sending to next page. Also
+	 * re-build the full href spec.
+	 */
+
+	function mmlhref(url, searchStr) {
+		// Instead of doing href=url, RE-CONSTRUCT the url because NS4.06
+        // DOES NOT properly build the url.
+
+		searchStr = searchStr.replace("'","\'");
+		// Don't just find last '\/' (could be part of argument after ?)
+		// First find ? if any.
+
+		qindex = location.href.indexOf("?");
+		if (qindex != -1) {
+		   // Now get string ONLY up to '?'
+		   sstr = location.href.substring(0, qindex);
+		   // Now find the last instance of '/'
+		   lindex = sstr.lastIndexOf("\/");
+		}
+		else {
+		   lindex = location.href.lastIndexOf("\/");
+        }
+
+		newurl = location.href.slice(0, lindex);
+		newurl = newurl + "/" + url + "&searchString="+buildURL(searchStr);
+		location.href=newurl;
+	}
+
+
+	function utf8(wide) {
+		var c, s;
+		var enc = "";
+		var i = 0;
+		while(i<wide.length) {
+    		c= wide.charCodeAt(i++);
+    		// handle UTF-16 surrogates
+	    	if (c>=0xDC00 && c<0xE000)
+    			continue;
+    		if (c>=0xD800 && c<0xDC00) {
+		    	if (i>=wide.length)
+		      		continue;
+	    	  	s= wide.charCodeAt(i++);
+    			if (s<0xDC00 || c>=0xDE00)
+	    			continue;
+    	  		c= ((c-0xD800)<<10)+(s-0xDC00)+0x10000;
+	    	}
+		    // output value
+    		if (c<0x80)
+    			enc += String.fromCharCode(c);
+	    	else if (c<0x800)
+    			enc += String.fromCharCode(0xC0+(c>>6),0x80+(c&0x3F));
+    		else if (c<0x10000)
+	    		enc += String.fromCharCode(0xE0+(c>>12),0x80+(c>>6&0x3F),0x80+(c&0x3F));
+    		else
+    			enc += String.fromCharCode(0xF0+(c>>18),0x80+(c>>12&0x3F),0x80+(c>>6&0x3F),0x80+(c&0x3F));
+	  	}
+		return enc;
+	}
+
+	var hexchars = "0123456789ABCDEF";
+
+	function toHexnew(n) {
+  		return hexchars.charAt(n>>4)+hexchars.charAt(n & 0xF);
+	}
+
+	var okURIchars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-";
+
+	function encodeURIComponentNew(s) {
+  		var s = utf8(s);
+  		var c;
+  		var enc = "";
+  		for (var i= 0; i<s.length; i++) {
+    		if (okURIchars.indexOf(s.charAt(i))==-1)
+	    		enc += "%"+toHexnew(s.charCodeAt(i));
+			else
+				enc += s.charAt(i);
+		}
+		return enc;
+	}
+
+	function buildURL(fld){
+		if (fld == "")
+			return false;
+		var encodedField = "";
+		var s = fld;
+		var b = navigator.appName
+		if ( b == "Microsoft Internet Explorer" ) {
+			encodedField = escape(fld);
+		}
+		else {
+			encodedField = encodeURIComponentNew(fld);
+		}
+
+		return encodedField;
+	}
+
+
+	/*
+	 * This function opens another window so older NS do not take over
+	 * the SP window.
+	 *
+	 * this function was modified for 6.1 Sr1 to do a simple window.open
+	 * previously it opened and closed and then opened again to avoid
+	 * a netscape issue. This wasn't reproducible as of 44 build and
+	 * books does not claim support for NN 4.
+	 * If this issue pops up again, the correct fix
+	 * should be to add a timestamp to the url.
+	 *
+	 * @param url url to the redirect page in skillport.
+	 *
+	 */
+
+
+	/**
+	 * enableFields method enables the login/password input fields in the login form.
+	 * This method is called by snifferSimple applet
+	 *
+	 */
+	function enableFields(){
+		document.loginForm.login.disabled=false;
+		document.loginForm.password.disabled=false;
+	}
+
+	/**
+	 * disableFields method disables the login/password input fields in the login form.
+	 * This method is called by snifferSimple applet
+	*/
+	function disableFields(){
+		document.loginForm.login.disabled=true;
+		document.loginForm.password.disabled=true;
+	}
+
+	/**
+	 * replaceSplCharByEscape method replaces a special character with its corresponding escape character (using backslash) in given string.
+	 *
+	 * @param str string in which special character is to be replaced by its escape character (using backslash).
+	 * @param splChar the special character which is to be replaced by its escape character (using backslash) in the given string.
+	*/
+	function replaceSplCharByEscape(str, splChar){
+		var specialChars = "\'\"\\\b\f\n\r\t";
+		if (specialChars.indexOf(splChar) == -1)
+			return str;
+		var escapeChar ="\\"+ splChar ;
+		str = str.replace(splChar, escapeChar);
+		return str;
+	}
+
+	function isValidEmail(frmElement) {
+	    var email_local_char_match = "[a-z0-9!#$%&'*+\\-\\/=?^_`{|}~]";
+        //CR204631, generic top-level domain (gTLD) can be virtually anything for a fee (https://www.icann.org/resources/pages/tlds-2012-02-25-en)
+        var email_regex_str = "^(" + email_local_char_match + "\\.?)*" + email_local_char_match + "@([a-z0-9][\\-.]?)*[a-z0-9]\\.[a-z0-9]{2,}$";
+    	var emailRegEx= new RegExp(email_regex_str, "i");
+    	inputStr = frmElement.value;
+	    return emailRegEx.test(inputStr);
+	}
+
+
+	/**
+	copied from FormValidation.js in skilladmin\javascript
+	**/
+	function JSTrim(str){
+  		return str.replace(/^\s*|\s*$/g,"");
+	}
+
+	function isInteger(theFieldVal){
+  		for (var i = 0; i < theFieldVal.length; i++){
+    		var charVal = theFieldVal.charAt(i);
+    		if (((charVal < "0") || (charVal > "9"))){ // Check that current character is number.
+      			return false;
+    		}
+		}
+		// All characters are numbers.
+		return true;
+	}
+
+	 function isFloat(theFieldVal){
+		for (var i = 0; i < theFieldVal.length; i++){   		
+			var charVal = theFieldVal.charAt(i);
+			if (((charVal < "0") || (charVal > "9")) && charVal != "."){ // Check that current character is number.
+				return false;
+			}
+		}
+		// All characters are numbers.
+		return true;
+	}
+
+	function submitForm(){
+		document.snifferform.submit();
+	}
+
+	function setSyncTrue()
+	{
+		document.snifferform.sync.value ="yes";
+		/**
+		for regfree applet case, launching applet does
+		*/
+		doRegBasedSCMSync();
+	}
+
+	function setSyncFalse(){
+		document.snifferform.sync.value ="no";
+	}
+
+
+
+	function eraseCookie() {
+		createCookie("cookie","",-1);
+	}
+
+	function createCookie(name,value,days) {
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime()+(days*24*60*60*1000));
+			var expires = "; expires="+date.toGMTString();
+		}
+		else{
+			var expires = "";
+			document.cookie = name+"="+value+expires+"; path=/";
+		}
+	}
+
+	var showDebug = "false";
+
+	function writeAPPLETTags(){
+		document.write("<APPLET CODEBASE='" + "https://csc.skillport.com/skillportfe/applet"  + "' CODE='com.skillsoft.scmlauncher.SCMLauncherApplet' MAYSCRIPT WIDTH='0' HEIGHT='0'>");
+		document.write("<PARAM NAME='cabbase' VALUE='scmlauncher.cab'>");
+		document.write("<PARAM NAME='archive' VALUE='scmlauncher.jar'>");
+		document.write("<PARAM name='showDebug' value='"+ showDebug + "'>");
+		document.write("<PARAM name='ssoData' value='"+ commandSCM_URL + "'>");
+		document.write("</APPLET>");
+
+	}//end writeAPPLETTags
+
+	function writeOBJECTTags(){
+		document.write("<OBJECT classid='clsid:8AD9C840-044E-11D1-B3E9-00805F499D93' width='0' height='0' codebase='http://java.sun.com/products/plugin/1.2.2/jinstall-1_2_2-win.cab#Version=1,2,2,0'>");
+		document.write("<PARAM name='java_code' value='com.skillsoft.scmlauncher.SCMLauncherApplet.class'>");
+		document.write("<PARAM name='java_codebase' value='" + "https://csc.skillport.com/skillportfe/applet" + "'>");
+		document.write("<PARAM name='java_archive' value='scmlauncher.jar'>");
+		document.write("<PARAM name='type' value='application/x-java-applet;version=1.2'>");
+		document.write("<PARAM name='showDebug' value='"+ showDebug + "'>");
+		document.write("<PARAM name='ssoData' value='"+ commandSCM_URL + "'>");
+		var thebrowser=navigator.userAgent.toLowerCase();
+
+		if(thebrowser.indexOf('windows')!=-1){
+			document.write("<COMMENT>");
+			document.write("<EMBED type='application/x-java-applet;version=1.2' width='0' height='0' pluginspage='http://java.sun.com/products/plugin/' java_code='com.skillsoft.scmlauncher.SCMLauncherApplet.class' java_codebase='" + "https://csc.skillport.com/skillportfe/applet"  + "' java_archive='scmlauncher.jar' showDebug='"+ showDebug + "' ssoData='"+ commandSCM_URL + "'/>");
+			document.write("<NOEMBED>");
+			document.write("        JRE Plugin tag not supported.");
+			document.write("</NOEMBED>");
+			document.write("</COMMENT>");
+	   }
+		document.write("</OBJECT>");
+	}//end writeOBJECTTags
+
+		function writeDetectJVMApplet(){
+			document.write("<APPLET CODE='DetectJVMVersion.class' CODEBASE='" + "https://cdnlibrary.skillport.com/scm/35scp7scmdlnopassSSL/web/applet/"  + "' NAME='detecter' WIDTH=1 HEIGHT=1  MAYSCRIPT='mayscript' alt=''>");
+			document.write("</APPLET>");
+		}
+
+	function writeSnifferLoaderApplet(dosubmit) {
+        document.write("<APPLET CODE='com.skillsoft.scmlocatorloader.SCMLocatorLoader' CODEBASE='https://csc.skillport.com/skillportfe/applet' NAME='scmlocator' WIDTH=1 HEIGHT=1  MAYSCRIPT alt=''>");
+        document.write("    <PARAM NAME='cabbase' VALUE='scmlocatorloader.cab'>");
+        document.write("    <PARAM NAME='archive' VALUE='scmlocatorloader.jar'>");
+		document.write("	<PARAM name='CLASS' value='__skillsoftLoaded'>");
+		document.write("	<PARAM name='sniff' value='1'>");
+		document.write("	<PARAM name='submitform' value='"+dosubmit+"'>");
+		document.write("</APPLET>");
+	}
+
+	function checkCookieName(cookieName){
+		var theCookie=""+document.cookie;
+		var ind=theCookie.indexOf(cookieName);
+		if (ind==-1 || cookieName==""){
+			return false;
+		}
+		else{
+			var ind1 = theCookie.indexOf(';',ind);
+			if ( ind1 == -1 ){
+				ind1 = theCookie.length;
+			}
+			return unescape(theCookie.substring(ind+cookieName.length+1,ind1));
+		}
+	}
+
+
+    var timeoutId;
+	var timerId;
+    var tooltipLayer
+
+	function showtip(event, text,listCount) {
+        if (document.getElementById) {
+            tooltipLayer = document.getElementById('tooltip');
+            styleRef     = ".style";
+        }else if (document.layers) {
+            tooltipLayer = document.layers['tooltip'];
+            styleRef     = "";
+              for (var i = 1;i <= listCount ;i++) {
+			        theLayer = eval("document.layers['menuHi" + i + "']");
+                    theLayer.visibility = 'hidden';
+			  }
+        }
+        tooltipLayer.style.left=event.pageX+5;
+        tooltipLayer.style.top=event.pageY-25;
+        tooltipLayer.innerHTML = text;
+        timeoutId = setTimeout("tooltipLayer.style.visibility='visible';",250);
+    }
+    function hidetip() {
+        clearTimeout(timeoutId);
+        if (document.getElementById) {
+            document.getElementById('tooltip').style.visibility="hidden";
+        } else if (document.layers) {
+            document.layers['tooltip'].visibility = "hidden";
+        }
+    }
+
+    function makeHttpUrl(){
+		var feurl = "/skillportfe" + "/";
+		return feurl;
+	}
+
+   function viewLog(source){
+	url =  "/skillportfe/admin/viewLog.action?Log="+source;
+	window.open(url,'ErrLog','screenx=25,screeny=50,scrollbars,menubar=no,resizable=yes,location=no,width=640,height=480');
+   }
+
+   function displayAddOnError(errorMessage){
+		newMessage= "An error occurred while attempting the operation listed below.\n Please try the operation again later. If the problem persists, contact\n your SkillPort System Administrator with the information below.\n" + errorMessage ;
+		alert(newMessage);
+		if((location.href.indexOf("selectedtab=exxceed") != -1) ||
+			(location.href.indexOf("selectedtab=skillview") != -1)){
+			location.href="javascript:history.go(-1)";
+		} else if ((location.href.indexOf("exxceed/exxceedendlogin.action") != -1) ||
+			(location.href.indexOf("skillview/skillViewLogin.action") != -1)){
+			window.close();
+		}
+	}
+
+	function openPageAddOn(newUrl){
+		location.href = newUrl;
+	}
+
+	function launchAddOnSite(title, action) {
+		var locationUrl = makeHttpUrl() + action;
+		newWind=window.open(locationUrl, title,'screenX=25,screenY=50,scrollbars,menubar=no,resizable=yes,location=no,width=640,height=480');
+	}
+
+	//function to return to the login screen
+	function backToLoginScreen(formName){
+		var theForm = eval("document." + formName)
+		if (formName != 'secretQuestionAnswerEmailForm' && !document.getElementById('defaultDocument').value == "") {
+        theForm.action = "/skillportfe"+document.getElementById('defaultDocument').value;
+        }else{        		
+		theForm.action = "/skillportfe/login.action";
+		}
+		theForm.submit();
+		return ;
+	}
+
+	//function open the mentoring course window
+	function mentorLink(url, launchInSameWindow){
+		if(!launchInSameWindow){
+			launchInSameWindow = "false";
+		}
+		if(launchInSameWindow != 'true')
+			window.open(url,'content_player','screenx=0,screeny=0,scrollbars=yes,width=772,height=522');
+		else
+			location.href = url;
+	}
+
+	// function to click a button on enter event.
+	function keyPress(evt,button_id){
+		if(evt.which || evt.keyCode)
+		{
+			if((evt.which == 13) || (evt.keyCode == 13))
+       		{
+       			document.getElementById(button_id).focus();
+				document.getElementById(button_id).click();
+				return false;    
+            }
+			return true;
+		}
+	}
+	
+	//function open the course reset window or player window
+	function resetWindow(url){
+		window.open(url,'resetwindow','scrollbars,menubar=no,resizable=no,left=5,top=5,location=no,width=620,height=140');
+	}
+	
+	//function to open the ILT Session window
+	function launchSession(sessionId) {
+		url = '/skillportfe/ajaxasset/getlaunchurlforuser.action';
+		try {
+			Ext.Ajax.request({
+				url : url,
+				params : {
+					identifier : sessionId
+				},
+				scope : this,
+				success : function(result, response) {
+					var launchURL = result.responseText.toString();
+					iLTLink(launchURL);
+				}			
+			});
+	
+		} catch (e) {
+			alert(e);
+		}
+	}
+	function iLTLink(url){	
+		var leftToCenter= (screen.width - 750)/2;
+        var topToCenter= (screen.height - 550)/2;
+		var win = window.open(url,'spcsf_player','left='+leftToCenter+',top='+topToCenter+',scrollbars,menubar=no,resizable=yes,location=no,width=750,height=550');
+		win.focus();
+	}
+	
+	/*
+	 * This function will be called from summary pages(508 mode )while removing an item from my plan	 
+	 */
+	function deleteFun(link,title,devPlanSw,devPlanStatus){	
+	
+		if(devPlanSw && devPlanStatus && devPlanSw == 1 && devPlanStatus == 2){
+      	    if( confirm("Adding or removing asset to or from an approved development plan will change the status to unapproved. Do you wish to continue?") ){
+			}else{
+					return;
+			}
+        }
+        
+		var answer = confirm("Are you sure you want to delete "
+					+  "\"" + title + "\"" + " ?");		
+		if (answer) {
+			window.location.href=link;
+		}
+	}
+	
+	/*
+	 * This function will be called from myplanList.ftl(508 mode )while removing an item from my plan
+	 * For custom folders, confirmation message is different
+	 */
+	function confirmDelete(itemtype, targetgroup, title, id, assetType, mgaIndicator,myPlanId,devPlanSw,devPlanStatus,eventId)
+	 {
+		var prompt ="";	
+		
+		if(devPlanSw && devPlanStatus && devPlanSw == 1 && devPlanStatus == 2){
+      	    if( confirm("Adding or removing asset to or from an approved development plan will change the status to unapproved. Do you wish to continue?") ){
+			}else{
+					return;
+			}
+        }
+		
+		if (itemtype == "custom"){
+			var msg 	=  "WARNING: Deleting this folder will also delete all items in the folder." + "\n"
+			msg			+= "To delete, select OK. To exit, select Cancel" + "\n";
+			prompt 	= confirm(msg);
+		}else {
+			prompt = confirm("Are you sure you want to delete "
+					+  "\"" + title + "\"" + " ?");		
+		}		
+		if (prompt) {
+			document.deleteForm.text.value=title;
+			var thisLocation = "main.action?content=removeFromMyPlanx508";
+			thisLocation	 += "&parent=" + myEscape(targetgroup);
+			thisLocation	 += "&itemType=" + itemtype;
+			thisLocation	 += "&objectid=" + id;
+			thisLocation	 += "&folderType=" + assetType;
+			thisLocation	 += "&mgaIndicator=" + mgaIndicator;
+			if(myPlanId)
+				thisLocation	 += "&myPlanId=" + myPlanId;
+			if(devPlanSw)
+				thisLocation	 += "&devPlanSw=" + devPlanSw;
+			if(eventId)
+				thisLocation	 += "&eventId=" + eventId;			
+
+			document.deleteForm.action 	 = thisLocation;
+			document.deleteForm.submit();
+		}
+	}
+	
+	/*
+	 * This function will be called while enrolling any LP or LLc to check if the LP already exists 
+	 * in My Plan. If yes then conditional message will be shown 
+	 */
+	 function enrollmentDuplicacyCheck(loId, title, assetType, objectInMyPlan,myPlanPath,mgaIndicator,requireApproval )
+	  {	 		 
+		if(requireApproval && requireApproval == 'true')
+		{
+		  document.lpform.courseId.value = loId;
+		  document.lpform.title.value = title;
+		  document.lpform.assetType.value = assetType;
+		  document.lpform.objectInMyPlan.value = objectInMyPlan;
+		  document.lpform.caller.value = 'summaryPage';
+		  document.lpform.x508.value = '1';
+		  document.lpform.myPlanPath.value = myPlanPath;
+		  document.lpform.mgaIndicator.value = mgaIndicator;
+		  document.lpform.requireApproval.value = 'true';
+		  document.lpform.approvalType.value = 'LP';
+		  document.lpform.action = 'main.action?content=isDuplicateWithApproval';
+		  document.lpform.submit();
+		}else{
+		
+        	  try {
+        				Ext.get('enroll_'+loId).load({
+        					url:'ajax/isDuplicate.action',
+        					 params:{ 
+        					 courseId: loId,
+        					 title:title,	
+        					 assetType:assetType,
+        					 objectInMyPlan : objectInMyPlan,						 
+        					 caller:'summaryPage',
+        					 x508: '1',
+        					 myPlanPath:myPlanPath,
+        					 mgaIndicator:mgaIndicator
+        					 },
+        					 scope : this,
+        					 scripts:true
+        					 
+        					 });
+        			} catch (e) {
+        				alert(e);
+        			}
+        }
+	  }
+	  
+	function downloadCourse(id,myPlanPath,credentialId)
+	{
+		var divId = 'data_'+id;
+		try {
+				Ext.get(divId).load({
+					url:'/skillportfe/downloadCourseDetectSCM.action',
+					 params:{ 
+					 id: id,
+					 myPlanPath:myPlanPath,
+					 credentialId:credentialId
+					},
+					 scripts : true,
+					 scope : this
+				});
+			} catch (e) {
+				alert(e);
+			}
+	}	
+	
+	function removeEvalFromMyPlan(id,title) {
+        var answer = confirm("Are you sure you want to delete "
+                    +  "\"" + title + "\"" + " ?");     
+        if (answer) {
+            document.deleteForm.text.value=title;
+            var thisLocation = "main.action?content=removeEvalFromMyPlanx508";
+            thisLocation     += "&objectid=" + id;
+            thisLocation     += "&text" + title;
+            document.deleteForm.action   = thisLocation;
+            document.deleteForm.submit();        
+        }	
+	}	
+	/*
+	 * This function will be called from navButtonManager.js to check the special charecters in the title 
+	 *
+	 */
+	function validString(stringValue){
+    var disAllowedChars = "^,*,(,),`,{,},|,[,],\\,\",<,>";
+	var targetChar;
+	var disAllowedCharsArray   = disAllowedChars.split(",");
+	for ( var i = 0;   i < disAllowedCharsArray.length;   i++ ) {
+		targetChar = disAllowedCharsArray[i];
+		var messageAttribute = new Array();
+		messageAttribute[0]= '<b>'+targetChar+'</b>';
+		var dataVaildationMsg = messageformat(INTL_DATAVALIDATION_MSG, messageAttribute);	
+		if ( stringValue.indexOf( targetChar ) != -1 ) {
+			Ext.Msg.show({
+				// TODO msg must be localized
+				msg : dataVaildationMsg ,
+				buttons : { ok: INTL_OK_BUTTON },
+				fn : function(event) {
+					if (event == 'yes') {
+						return true;
+					}
+				},
+				animEl : 'elId',
+				closable : false,
+				width : 400,
+				scope : this
+			});
+			
+			return false;
+			break;
+		}
+	}
+	return true;
+}
+
+function validURLString(stringValue){
+    var disAllowedChars = "^,*,(,),`,{,},|,\\,\",<,>";
+	var targetChar;
+	var disAllowedCharsArray   = disAllowedChars.split(",");
+	for ( var i = 0;   i < disAllowedCharsArray.length;   i++ ) {
+		targetChar = disAllowedCharsArray[i];
+		var messageAttribute = new Array();
+		messageAttribute[0]= '<b>'+targetChar+'</b>';
+		var dataVaildationMsg = messageformat(INTL_DATAVALIDATION_MSG, messageAttribute);	
+		if ( stringValue.indexOf( targetChar ) != -1 ) {
+			Ext.Msg.show({
+				// TODO msg must be localized
+				msg : dataVaildationMsg ,
+				buttons : { ok: INTL_OK_BUTTON },
+				fn : function(event) {
+					if (event == 'yes') {
+						return true;
+					}
+				},
+				animEl : 'elId',
+				closable : false,
+				width : 400,
+				scope : this
+			});
+			
+			return false;
+			break;
+		}
+	}
+	return true;
+}
+
+function validURLData (theField, stringValue){
+	if(validURLString(stringValue)){
+		var targetStr = theField.value;
+		if(isValidUrl(eval(theField), targetStr, 
+		  "Please enter a valid url.",
+          "DATA VALIDATION ERROR.\n The URL cannot contain space.\n Please change your entry and try again."
+		  ))
+		{
+			return true;
+		}
+		else{
+			return false;// URL field's value is not a valid URL
+		}
+	}else{
+		return false;// URL field is having bogus chars
+	}
+}
+function messageformat(s,arg){	
+    var i = 0;
+    while(i < arg.length) {
+	    s = s.replace("{"+(i)+"}",arg[i]);
+	    i++;
+    }
+    return s;
+}
+	</script>
+
+
+
+	
+	<title>Certificate of Completion</title>
+
+	<link rel="stylesheet" type="text/css" href="./Certificate of Completion7_files/certificate.css">
+	<link rel="stylesheet" type="text/css" href="./Certificate of Completion7_files/certificatePrint.css">
+
+<script type="text/javascript">
+
+	window.onload=function(){
+
+		var body = document.body,
+			html = document.documentElement;
+	
+	    var height=Math.min(screen.height, Math.max( body.scrollHeight, body.offsetHeight, 
+	                       html.clientHeight, html.scrollHeight, html.offsetHeight));
+	
+	    var width=Math.min(screen.width, Math.max( body.scrollWidth, body.offsetWidth, 
+	                       html.clientWidth, html.scrollWidth, html.offsetWidth));                
+	
+		window.resizeTo(width, height);
+		window.onunload = function(){
+			window.opener.focusOnSourceElement('certificateSource');
+		}
+	};
+	
+   function framePrint(divId) {
+   
+   	   var printDiv=document.getElementById(divId);
+   	   if(printDiv){
+	       var printContents = printDiv.innerHTML;
+	       var originalContents = document.body.innerHTML;
+	       document.body.innerHTML = "<html><head><title></title></head><body>" + printContents + "</body></html>";
+	       window.print();
+	       document.body.innerHTML = originalContents;
+       }
+   }
+</script>
+</head>
+
+<body data-gr-c-s-loaded="true">	
+
+
+
+
+<div class="p-print">
+	<div class="p-print-child">
+			<div class="p-print-text">
+				    <a style="text-decoration: none !important;" class="s-h3 s-right s-print" onclick="javascript:framePrint(&#39;print-area&#39;)">
+				    	Print</a>
+			</div>
+			<div class="p-print-icon">
+				    <a id="printCertificate" title="Print Certificate" class="x-container s-right s-printIcon s-print x-container-default" onclick="javascript:framePrint(&#39;print-area&#39;)"></a>
+			</div>
+	</div>
+</div>
+<div align="center" class="p-print-area">
+	<div id="print-area">	
+		<table align="CENTER" border-collapse:="" collapse;width="100%" height="100%">
+			<tbody><tr>
+				<td align="CENTER">
+					<img class="top" onmouseover="return false" onclick="return false" ondblclick="return false" onmousedown="return false" onmousemove="return false" onmouseout="return false" onmouseup="return false" src="./Certificate of Completion7_files/certificate_top.jpg" "="" style="padding-bottom:50px;" alt="Certificate of Completion" title="Certificate of Completion"></td>
+			</tr>
+			<tr>
+				<td class="certCommon" align="CENTER"><h3>This is to certify that	
+				</h3></td>
+			</tr>	
+			<tr>
+				<td class="certName" align="CENTER"><h3>JeevanaJyothi Gurasala</h3></td>	
+			</tr>	
+			<tr>
+			<td class="certCommon" align="CENTER"><h3>has completed the course</h3></td>
+			</tr>	
+			<tr>
+				<td class="certCourse" align="CENTER"><h3>
+				<script language="JavaScript">
+					document.write(decodeURIComponent('Exploring Chatbots - sd_exui_a03_it_enus'));
+				</script>Exploring Chatbots - sd_exui_a03_it_enus
+				</h3></td>
+			</tr>
+			<tr>
+				<td class="certCommon" align="CENTER"><h3>on</h3></td>
+			</tr>			
+			<tr>
+				<td class="certDate" align="CENTER"><h3>
+					Dec 18, 2018						
+				</h3></td>
+			</tr>
+			<tr>
+				<td align="CENTER">
+						<img class="bottom" onmouseover="return false" onclick="return false" ondblclick="return false" onmousedown="return false" onmousemove="return false" onmouseout="return false" onmouseup="return false" src="./Certificate of Completion7_files/303695553162_image.png" alt="Certificate of Completion" title="Certificate of Completion"></td>
+	    	</tr>
+		</tbody></table>
+	</div>
+</div>
+
+
+
+
+</body></html>
